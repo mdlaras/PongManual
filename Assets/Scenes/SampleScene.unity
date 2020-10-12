@@ -218,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131194698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.87, y: 0.98, z: -0.19312811}
+  m_LocalPosition: {x: -9.07, y: 0.93, z: -0.19312811}
   m_LocalScale: {x: 1, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -971,5 +971,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d6834a1cf90484ebbde46b2c884317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posy: 0
-  collisionArea: {x: 0, y: 0}
+  paddleVelocity: 3

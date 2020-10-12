@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PaddlePlayer : MonoBehaviour
 {
-    public float posy;
-    public Vector2 collisionArea;
+    float currentVelocity;
+    [SerializeField] float paddleVelocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        posy = transform.position.y;
+        currentVelocity = 0;
     }
 
     // Update is called once per frame
@@ -18,16 +18,17 @@ public class PaddlePlayer : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            posy = posy +  0.00000001f;
-            transform.position = transform.position + new Vector3(0f,posy*0.1f,0f);
-            Debug.Log(transform.position.y);
+            currentVelocity = paddleVelocity;
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            posy = posy + 0.00000001f;
-            transform.position = transform.position + new Vector3(0f, -posy*0.1f, 0f);
-            Debug.Log(transform.position.y);
+            currentVelocity = -paddleVelocity;
+        }
+        else
+        {
+            currentVelocity = 0;
         };
-        collisionArea = new Vector2(posy + 10, posy - 10);
+
+        transform.position += new Vector3(0, currentVelocity, 0) * Time.deltaTime;
     }
 }
