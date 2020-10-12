@@ -12,7 +12,6 @@ public class Ball : MonoBehaviour
     float mag;
     float posx;
     public float posy;
-    int collidedOn = 5;
     float offset = 2.5f;
     float ballVelocity;
     [SerializeField] Transform player;
@@ -22,20 +21,26 @@ public class Ball : MonoBehaviour
     [SerializeField] Transform WallRight;
     [SerializeField] Transform WallLeft;
 
-    void Collide()
+    void Collide(Vector3 ReflectionAngle)
     {
-        Debug.Log(collidedOn);
         point2 = transform.position;
         mag = Vector3.Distance(point2, point1);
-        unitvec = (point2 - point1) / mag;
-        Debug.Log(unitvec);
+        if (Mathf.Abs(mag) < 0.001)
+        {
+            unitvec = new Vector3(1, 1, 0);
+        }
+        else
+        {
+            unitvec = (point2 - point1) / mag;
+        }
         point1 = point2;
+        unitvec = Vector3.Reflect(unitvec, ReflectionAngle);
     }
     // Start is called before the first frame update
     void Start()
     {
         ballVelocity = 5f;
-        unitvec = Vector3.Normalize(new Vector3(0.03f, 0.03f, 0));
+        unitvec = new Vector3(1, 1, 0);
         point1 = transform.position;
     }
 
@@ -48,29 +53,22 @@ public class Ball : MonoBehaviour
         float playerlowbound = player.position.y - offset;
         float enemytopbound = enemy.position.y + offset;
         float enemylowbound = enemy.position.y - offset;
+
         if (posy <= WallBottom.position.y)
         { 
-            collidedOn = 1;
-            Collide();
-            unitvec = Vector3.Reflect(unitvec, new Vector3(0f, 1f, 0f));
+            Collide(new Vector3(0f, 1f, 0f));
         }
         if (posy >= WallTop.position.y)
         {
-            collidedOn = 2;
-            Collide();
-            unitvec = Vector3.Reflect(unitvec, new Vector3(0f, -1f, 0f));
+            Collide(new Vector3(0f, -1f, 0f));
         }
         if ((posx <= WallLeft.position.x) || ((posx <= player.position.x) && ((posy <=playertopbound) && (posy >= playerlowbound))))
         {
-            collidedOn = 3;
-            Collide();
-            unitvec = Vector3.Reflect(unitvec, new Vector3(-1f, 0f, 0f));
+            Collide(new Vector3(-1f, 0f, 0f));
         }
         if ((posx >= WallRight.position.x) || ((posx >= enemy.position.x) && ((posy <= enemytopbound) && (posy >=enemylowbound))))
         {
-            collidedOn = 4;
-            Collide();
-            unitvec = Vector3.Reflect(unitvec, new Vector3(1f, 0f, 0f));
+            Collide(new Vector3(1f, 0f, 0f));
         };
 
 
