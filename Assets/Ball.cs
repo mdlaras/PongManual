@@ -7,9 +7,6 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     Vector3 unitvec;
-    Vector3 point1;
-    Vector3 point2;
-    float mag;
     float posx;
     public float posy;
     float offset = 2.5f;
@@ -23,17 +20,6 @@ public class Ball : MonoBehaviour
 
     void Collide(Vector3 ReflectionAngle)
     {
-        point2 = transform.position;
-        mag = Vector3.Distance(point2, point1);
-        if (Mathf.Abs(mag) < 0.001)
-        {
-            unitvec = new Vector3(1, 1, 0);
-        }
-        else
-        {
-            unitvec = (point2 - point1) / mag;
-        }
-        point1 = point2;
         unitvec = Vector3.Reflect(unitvec, ReflectionAngle);
     }
     // Start is called before the first frame update
@@ -41,7 +27,6 @@ public class Ball : MonoBehaviour
     {
         ballVelocity = 5f;
         unitvec = new Vector3(1, 1, 0);
-        point1 = transform.position;
     }
 
     // Update is called once per frame
