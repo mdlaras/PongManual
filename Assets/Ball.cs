@@ -13,7 +13,7 @@ public class Ball : MonoBehaviour
     float posx;
     public float posy;
     int collidedOn = 5;
-    float offset = 3f;
+    float offset = 2.5f;
     float ballVelocity;
     [SerializeField] PaddlePlayer player;
     [SerializeField] PaddleEnemy enemy;

@@ -546,6 +546,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d022bd72a393d44dabc84e20910a234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ball: {fileID: 584192587}
+  paddleYVelocity: 8
+  TopWall: {fileID: 1048728248}
+  BottomWall: {fileID: 1101699357}
 --- !u!1 &981091739
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,4 +975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d6834a1cf90484ebbde46b2c884317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddleVelocity: 3
+  paddleVelocity: 8
+  TopWall: {fileID: 1048728248}
+  BottomWall: {fileID: 1101699357}

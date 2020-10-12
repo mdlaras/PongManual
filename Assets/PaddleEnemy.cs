@@ -4,28 +4,39 @@ using UnityEngine;
 
 public class PaddleEnemy : MonoBehaviour
 {
-    Ball ball;
-    Vector3 pos;
-    float distance;
+    [SerializeField] Ball ball;
+    [SerializeField] float paddleYVelocity;
+    [SerializeField] Rigidbody2D TopWall;
+    [SerializeField] Rigidbody2D BottomWall;
+    float offset = 3;
+    float currentVelocity;
+    Vector3 paddleCenter;
 
     // Start is called before the first frame update
     void Start()
     {
-        ball = FindObjectOfType<Ball>();
+        currentVelocity = 0;
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        pos = transform.position;
-        if(pos.y <= ball.transform.position.y && pos.y <= 4.96)
+        paddleCenter = transform.position;
+        if(paddleCenter.y <= ball.transform.position.y - offset && paddleCenter.y <= TopWall.transform.position.y)
         {
-            transform.position = transform.position + new Vector3(0f, 0.1f, 0f);
+            currentVelocity = paddleYVelocity;
         }
-        else if (pos.y >= ball.transform.position.y && pos.y >= -5.03)
+        else if (paddleCenter.y >= ball.transform.position.y + offset && paddleCenter.y >= BottomWall.transform.position.y)
         {
-            transform.position = transform.position + new Vector3(0f, -0.1f, 0f);
+            currentVelocity = -paddleYVelocity;
         }
+        else
+        {
+            currentVelocity = 0;
+        }
+
+        transform.position += new Vector3(0, currentVelocity, 0) * Time.deltaTime;
 
         
     }

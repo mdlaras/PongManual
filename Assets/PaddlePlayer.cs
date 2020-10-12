@@ -6,6 +6,9 @@ public class PaddlePlayer : MonoBehaviour
 {
     float currentVelocity;
     [SerializeField] float paddleVelocity;
+    [SerializeField] Rigidbody2D TopWall;
+    [SerializeField] Rigidbody2D BottomWall;
+    Vector3 paddleCenter;
 
     // Start is called before the first frame update
     void Start()
@@ -16,11 +19,12 @@ public class PaddlePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        paddleCenter = transform.position;
+        if (Input.GetKey(KeyCode.UpArrow) && paddleCenter.y <= TopWall.transform.position.y)
         {
             currentVelocity = paddleVelocity;
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.DownArrow) && paddleCenter.y >= BottomWall.transform.position.y)
         {
             currentVelocity = -paddleVelocity;
         }
