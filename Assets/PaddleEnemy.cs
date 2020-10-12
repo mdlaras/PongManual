@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PaddleEnemy : MonoBehaviour
 {
-    [SerializeField] Ball ball;
+    [SerializeField] Transform ball;
     [SerializeField] float paddleYVelocity;
-    [SerializeField] Rigidbody2D TopWall;
-    [SerializeField] Rigidbody2D BottomWall;
+    [SerializeField] Transform TopWall;
+    [SerializeField] Transform BottomWall;
     float offset = 3;
     float currentVelocity;
     Vector3 paddleCenter;
@@ -23,11 +23,11 @@ public class PaddleEnemy : MonoBehaviour
     void Update()
     {
         paddleCenter = transform.position;
-        if(paddleCenter.y <= ball.transform.position.y - offset && paddleCenter.y <= TopWall.transform.position.y)
+        if(paddleCenter.y <= ball.position.y - offset && paddleCenter.y <= TopWall.position.y)
         {
             currentVelocity = paddleYVelocity;
         }
-        else if (paddleCenter.y >= ball.transform.position.y + offset && paddleCenter.y >= BottomWall.transform.position.y)
+        else if (paddleCenter.y >= ball.position.y + offset && paddleCenter.y >= BottomWall.position.y)
         {
             currentVelocity = -paddleYVelocity;
         }
